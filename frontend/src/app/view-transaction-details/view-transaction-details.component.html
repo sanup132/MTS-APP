@@ -1,0 +1,36 @@
+<div class="container mt-5">
+    <div class="row">
+        <h1 class="text-center mb-5">Transaction Details</h1>
+        <div class="card mb-2">
+            <div class="card-header text-center">
+                <b class="text-primary">Transaction made on {{transactionInfo?.date | date : 'yyyy/MM/dd hh:mm:ss'}}</b>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><b>Transaction Type :</b> {{transactionInfo?.transactionType}}</p>
+                        <p><b>Transaction Amount :</b> {{transactionInfo?.amount}}</p>
+                        <p><b>Remarks :</b> {{transactionInfo?.remarks}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><b>Paid On :</b> {{transactionInfo?.date | date : 'yyyy/MM/dd hh:mm:ss'}}</p>
+                        <p><b>Paid By :</b> {{currentUser}} (You)</p>
+                        <p><b>Paid To :</b> {{payeeInfo?.name}}</p>
+                    </div>
+                </div>
+                <div class="row my-4">
+                    <div class="col-md-6">
+                        <p><b>Payer :</b> {{payerInfo?.fname}} {{payerInfo?.lname}}</p>
+                        <p><b>Payer Account No. :</b> {{payerInfo?.accountNumber}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><b>Payee :</b> {{payeeInfo?.name}}</p>
+                        <p><b>Payee Account No. :</b> {{payeeInfo?.accountNumber}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-body-secondary">
+            </div>
+        </div>
+    </div>
+</div>

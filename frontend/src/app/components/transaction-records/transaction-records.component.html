@@ -1,0 +1,37 @@
+<div class="container px-0 py-3">
+    <div class="row mb-5">
+        <div class="row">
+            <div class="dropdown px-0">
+                <button class="btn btn-secondary dropdown-toggle float-right" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Statements
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                     <li><a class="dropdown-item" href="#" (click)="downloadFile(transactions)">Last 10 Transactions</a></li>
+                        <li><a class="dropdown-item" href="#" (click)="downloadFile(transactions)">Current Month Transactions</a></li>
+                        <li><a class="dropdown-item" href="#" (click)="downloadFile(transactions)">Last 3 Months Transactions</a></li> 
+                    <li><a class="dropdown-item" href="#" (click)="downloadFile(transactions)">All
+                            Transactions</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card text-center mb-2 mt-3 mx-auto" style="width: 70%;" *ngFor="let transaction of transactions">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><b>Transaction Type :</b> {{transaction.transactionType}}</p>
+                        <p><b>Transaction Amount :</b> {{transaction.amount}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><b>Paid On :</b> {{transaction.date}}</p>
+                        <p><b>Remarks :</b> {{transaction.remarks}}</p>
+                    </div>
+                </div>
+                <button class="btn btn-primary mt-3"
+                    routerLink="/view-transaction-details/{{transaction.id}}/{{transaction.payeeId}}">View
+                    Details</button>
+            </div>
+        </div>
+    </div>
+</div>

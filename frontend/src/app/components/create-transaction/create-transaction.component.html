@@ -1,0 +1,39 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="submit-form mx-auto mb-4 p-5 border border-primary border-1 rounded-5" style="width: 500px;">
+            <h1 class="text-center text-primary"><b>Make Payment</b></h1>
+            <h1 class="text-center text-primary" style="font-size: 35px;"><b>-</b></h1>
+            <form (ngSubmit)="createTransaction()" [formGroup]="transactionForm" class="mt-3">
+                <div class="form-group">
+                    <label for="payeeId" class="mr-2">Payee: </label>
+                    <select formControlName="payeeId" id="payeeId">
+                        <option *ngFor="let payee of payees" value={{payee.id}}>{{payee.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="mr-2">Transaction Type: </label>
+                    <select formControlName="transactionType" id="transactionType">
+                        <option value="NEFT">NEFT</option>
+                        <option value="IMPS">IMPS</option>
+                        <option value="RTGS">RTGS</option>
+                        <option value="ECS">ECS</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="amount" class="">Amount</label>
+                    <input class="form-control" id="amount" (ngModelChange)="amountValidation($event)" required
+                        formControlName="amount" />
+                    <div id="amountHelpBlock" *ngIf="!(amountIsValidCheck)" class="form-text text-danger">
+                        {{amountIsValidText}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="remarks">Remarks</label>
+                    <input class="form-control" id="remarks" required formControlName="remarks" />
+                </div>
+
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>

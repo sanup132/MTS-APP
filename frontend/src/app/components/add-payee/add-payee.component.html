@@ -1,0 +1,29 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="submit-form mx-auto mb-4 p-5 border border-primary border-1 rounded-5" style="width: 400px;">
+            <h1 class="text-center text-primary"><b>Add Payee</b></h1>
+            <h1 class="text-center text-primary" style="font-size: 35px;"><b>-</b></h1>
+
+            <div *ngIf="!submitted">
+                <div class="form-group">
+                    <label for="name">Payee Name</label>
+                    <input type="text" class="form-control" id="name" required [(ngModel)]="payee.name" name="name" />
+                </div>
+                <div class="form-group">
+                    <label for="accountNumber">Account Number</label>
+                    <input class="form-control" id="accountNumber" (ngModelChange)="accountNumberValidation($event)" required [(ngModel)]="payee.accountNumber"
+                        name="accountNumber" />
+                    <div id="accountNumberHelpBlock" *ngIf="!(accountNumberIsValidCheck)" class="form-text text-danger">
+                        {{accountNumberIsValidText}}
+                    </div>
+                </div>
+                <button (click)="addPayee()" class="btn btn-success">Submit</button>
+            </div>
+
+            <div *ngIf="submitted">
+                <h4>Payee was added successfully!</h4>
+                <button class="btn btn-success" (click)="newPayee()">Add Payee</button>
+            </div>
+        </div>
+    </div>
+</div>
