@@ -104,4 +104,17 @@ public class UserAccountService {
 		}
 		return "Please add account info to update balance";
 	}
+
+
+	public List<Transaction> getLast10Transactions() {
+		return transactionRepo.findLast10Transactions();
+	}
+
+	public List<Transaction> getCurrentMonthTransactions() {
+		return transactionRepo.findCurrentMonthTransactions();
+	}
+
+	public List<Transaction> getLast3MonthTransactions() {
+		return transactionRepo.findLast3MonthTransactions();
+	}
 }

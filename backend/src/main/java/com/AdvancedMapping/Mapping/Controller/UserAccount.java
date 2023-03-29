@@ -87,4 +87,25 @@ public class UserAccount {
 		return ResponseEntity.ok().body(response);
 	}
 
+	// Method to get last 10 Transactions
+	@GetMapping("/users/last-10-transactions")
+	public ResponseEntity getLast10Transactions() {
+		List<Transaction> transactions = userService.getLast10Transactions();
+		return ResponseEntity.ok().body(transactions);
+	}
+
+	// Method to get current month Transactions
+	@GetMapping("/users/current-month-transactions")
+	public ResponseEntity getCurrentMonthTransactions() {
+		List<Transaction> transactions = userService.getCurrentMonthTransactions();
+		return ResponseEntity.ok().body(transactions);
+	}
+
+	// Method to get last 3 months Transactions
+	@GetMapping("/users/last-3-months-transactions")
+	public ResponseEntity getLast3MonthTransactions() {
+		List<Transaction> transactions = userService.getLast3MonthTransactions();
+		return ResponseEntity.ok().body(transactions);
+	}
+
 }

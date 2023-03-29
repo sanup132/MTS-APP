@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { KeycloakService } from 'keycloak-angular';
 import { Payee } from 'src/app/models/payee';
 import { Transaction } from 'src/app/models/transaction';
-import * as XLSX from 'xlsx';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -67,6 +66,24 @@ export class TransactionRecordsComponent implements OnInit {
       str += line + '\r\n';
     }
     return str;
+  }
+
+  downloadLast10Transactions() {
+    this.userService.getLast10Transactions().subscribe(res => {
+      this.downloadFile(res);
+    })
+  }
+
+  downloadCurrentMonthTransactions() {
+    this.userService.getCurrentMonthTransactions().subscribe(res => {
+      this.downloadFile(res);
+    })
+  }
+
+  downloadLast3MonthsTransactions() {
+    this.userService.getLast3MonthsTransactions().subscribe(res => {
+      this.downloadFile(res);
+    })
   }
 }
 

@@ -50,4 +50,16 @@ export class UserService {
     return this.http.get(`${baseUrl}/bank/users/transactions/${transactionId}`);
   }
 
+  getLast10Transactions(): Observable<any> {
+    return this.http.get(`${baseUrl}/bank/users/last-10-transactions`);
+  }
+  
+  getCurrentMonthTransactions(): Observable<any> {
+    return this.http.get(`${baseUrl}/bank/users/current-month-transactions`);
+  }
+  
+  getLast3MonthsTransactions(): Observable<any> {
+    return this.http.get(`${baseUrl}/bank/users/last-3-months-transactions`);
+  }
+
 }
