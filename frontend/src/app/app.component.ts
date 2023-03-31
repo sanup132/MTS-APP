@@ -8,7 +8,7 @@ import { ConfigService } from './config.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Angular 15 CRUD example';
+  title = 'Money-Transfer-System';
 
   constructor(private service: ConfigService, private keycloakService: KeycloakService) {
 

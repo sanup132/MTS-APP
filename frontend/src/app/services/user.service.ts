@@ -42,7 +42,7 @@ export class UserService {
     return this.http.post(`${baseUrl}/bank/users/add-balance`, data);
   }
 
-  getUserTransactions(payerId: String): Observable<any> {
+  getAllUserTransactions(payerId: String): Observable<any> {
     return this.http.get(`${baseUrl}/bank/users/get-user-transactions/${payerId}`);
   }
 
@@ -50,16 +50,16 @@ export class UserService {
     return this.http.get(`${baseUrl}/bank/users/transactions/${transactionId}`);
   }
 
-  getLast10Transactions(): Observable<any> {
-    return this.http.get(`${baseUrl}/bank/users/last-10-transactions`);
+  getLast10Transactions(payerId: String): Observable<any> {
+    return this.http.get(`${baseUrl}/bank/users/last-10-transactions/${payerId}`);
   }
   
-  getCurrentMonthTransactions(): Observable<any> {
-    return this.http.get(`${baseUrl}/bank/users/current-month-transactions`);
+  getCurrentMonthTransactions(payerId: String): Observable<any> {
+    return this.http.get(`${baseUrl}/bank/users/current-month-transactions/${payerId}`);
   }
   
-  getLast3MonthsTransactions(): Observable<any> {
-    return this.http.get(`${baseUrl}/bank/users/last-3-months-transactions`);
+  getLast3MonthsTransactions(payerId: String): Observable<any> {
+    return this.http.get(`${baseUrl}/bank/users/last-3-months-transactions/${payerId}`);
   }
 
 }

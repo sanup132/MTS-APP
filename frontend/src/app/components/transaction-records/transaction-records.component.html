@@ -7,30 +7,115 @@
                     Statements
                 </button>
                 <ul class="dropdown-menu dropdown-menu-dark">
-                     <li><a class="dropdown-item" href="#" (click)="downloadLast10Transactions()">Last 10 Transactions</a></li>
-                        <li><a class="dropdown-item" href="#" (click)="downloadCurrentMonthTransactions()">Current Month Transactions</a></li>
-                        <li><a class="dropdown-item" href="#" (click)="downloadLast3MonthsTransactions()">Last 3 Months Transactions</a></li> 
-                    <li><a class="dropdown-item" href="#" (click)="downloadFile(transactions)">All
-                            Transactions</a></li>
+                    <li><button class="dropdown-item" (click)="showLast10Transactions()">Last 10 Transactions</button>
+                    </li>
+                    <li><button class="dropdown-item" (click)="showCurrentMonthTransactions()">Current Month
+                            Transactions</button></li>
+                    <li><button class="dropdown-item" (click)="showLast3MonthsTransactions()">Last 3 Months
+                            Transactions</button></li>
+                    <li><button class="dropdown-item" (click)="showAllTransactions()">All
+                            Transactions</button></li>
                 </ul>
             </div>
         </div>
 
-        <div class="card text-center mb-2 mt-3 mx-auto" style="width: 70%;" *ngFor="let transaction of transactions">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p><b>Transaction Type :</b> {{transaction.transactionType}}</p>
-                        <p><b>Transaction Amount :</b> {{transaction.amount}}</p>
+        <div class="row text-center" *ngIf="showAllTransactionsFlag">
+            <div>
+                <button class="btn btn-success" (click)="downloadAllTransactions()">Download All Transactions</button>
+            </div>
+            
+            <div class="card text-center mb-2 mt-3 mx-auto" style="width: 70%;"
+                *ngFor="let transaction of allTransactions">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><b>Transaction Type :</b> {{transaction.transactionType}}</p>
+                            <p><b>Transaction Amount :</b> {{transaction.amount}}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><b>Paid On :</b> {{transaction.date}}</p>
+                            <p><b>Remarks :</b> {{transaction.remarks}}</p>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <p><b>Paid On :</b> {{transaction.date}}</p>
-                        <p><b>Remarks :</b> {{transaction.remarks}}</p>
-                    </div>
+                    <button class="btn btn-primary mt-3"
+                        routerLink="/view-transaction-details/{{transaction.id}}/{{transaction.payeeId}}">View
+                        Details</button>
                 </div>
-                <button class="btn btn-primary mt-3"
-                    routerLink="/view-transaction-details/{{transaction.id}}/{{transaction.payeeId}}">View
-                    Details</button>
+            </div>
+        </div>
+
+        <div class="row text-center" *ngIf="showLast10TransactionsFlag">
+            <div>
+                <button class="btn btn-success" (click)="downloadLast10Transactions()">Download Last 10 Transactions</button>
+            </div>
+            
+            <div class="card text-center mb-2 mt-3 mx-auto" style="width: 70%;"
+                *ngFor="let transaction of last10Transactions">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><b>Transaction Type :</b> {{transaction.transactionType}}</p>
+                            <p><b>Transaction Amount :</b> {{transaction.amount}}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><b>Paid On :</b> {{transaction.date}}</p>
+                            <p><b>Remarks :</b> {{transaction.remarks}}</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary mt-3"
+                        routerLink="/view-transaction-details/{{transaction.id}}/{{transaction.payeeId}}">View
+                        Details</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row text-center" *ngIf="showCurrentMonthTransactionsFlag">
+            <div>
+                <button class="btn btn-success" (click)="downloadCurrentMonthTransactions()">Download Current Month Transactions</button>
+            </div>
+            
+            <div class="card text-center mb-2 mt-3 mx-auto" style="width: 70%;"
+                *ngFor="let transaction of currentMonthTransactions">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><b>Transaction Type :</b> {{transaction.transactionType}}</p>
+                            <p><b>Transaction Amount :</b> {{transaction.amount}}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><b>Paid On :</b> {{transaction.date}}</p>
+                            <p><b>Remarks :</b> {{transaction.remarks}}</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary mt-3"
+                        routerLink="/view-transaction-details/{{transaction.id}}/{{transaction.payeeId}}">View
+                        Details</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row text-center" *ngIf="showLast3MonthsTransactionsFlag">
+            <div>
+                <button class="btn btn-success" (click)="downloadLast3MonthsTransactions()">Download Last 3 Months Transactions</button>
+            </div>
+            
+            <div class="card text-center mb-2 mt-3 mx-auto" style="width: 70%;"
+                *ngFor="let transaction of last3MonthsTransactions">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><b>Transaction Type :</b> {{transaction.transactionType}}</p>
+                            <p><b>Transaction Amount :</b> {{transaction.amount}}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><b>Paid On :</b> {{transaction.date}}</p>
+                            <p><b>Remarks :</b> {{transaction.remarks}}</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary mt-3"
+                        routerLink="/view-transaction-details/{{transaction.id}}/{{transaction.payeeId}}">View
+                        Details</button>
+                </div>
             </div>
         </div>
     </div>

@@ -88,24 +88,28 @@ public class UserAccount {
 	}
 
 	// Method to get last 10 Transactions
-	@GetMapping("/users/last-10-transactions")
-	public ResponseEntity getLast10Transactions() {
-		List<Transaction> transactions = userService.getLast10Transactions();
+	//http://localhost:5555/bank/users/last-10-transactions
+	@GetMapping("/users/last-10-transactions/{payerId}")
+	public ResponseEntity getLast10Transactions(@PathVariable String payerId) {
+		List<Transaction> transactions = userService.getLast10Transactions(payerId);
 		return ResponseEntity.ok().body(transactions);
 	}
 
 	// Method to get current month Transactions
-	@GetMapping("/users/current-month-transactions")
-	public ResponseEntity getCurrentMonthTransactions() {
-		List<Transaction> transactions = userService.getCurrentMonthTransactions();
+	//http://localhost:5555/bank/users/current-month-transactions
+	@GetMapping("/users/current-month-transactions/{payerId}")
+	public ResponseEntity getCurrentMonthTransactions(@PathVariable String payerId) {
+		List<Transaction> transactions = userService.getCurrentMonthTransactions(payerId);
 		return ResponseEntity.ok().body(transactions);
 	}
 
 	// Method to get last 3 months Transactions
-	@GetMapping("/users/last-3-months-transactions")
-	public ResponseEntity getLast3MonthTransactions() {
-		List<Transaction> transactions = userService.getLast3MonthTransactions();
+	//http://localhost:5555/bank/users/last-3-months-transactions
+	@GetMapping("/users/last-3-months-transactions/{payerId}")
+	public ResponseEntity getLast3MonthTransactions(@PathVariable String payerId) {
+		List<Transaction> transactions = userService.getLast3MonthTransactions(payerId);
 		return ResponseEntity.ok().body(transactions);
+
 	}
 
 }

@@ -13,19 +13,28 @@ import { UserService } from 'src/app/services/user.service';
 export class TransactionRecordsComponent implements OnInit {
 
   payeesInfos!: Payee[];
-  transactions!: Transaction[];
+  allTransactions!: Transaction[];
   data: any;
   fileName = 'BankStatement.xlsx';
+
+  showAllTransactionsFlag: Boolean = true;
+  showLast10TransactionsFlag: Boolean = false;
+  showCurrentMonthTransactionsFlag: Boolean = false;
+  showLast3MonthsTransactionsFlag: Boolean = false;
+
+  last10Transactions!: Transaction[];
+  currentMonthTransactions!: Transaction[];
+  last3MonthsTransactions!: Transaction[];
 
   constructor(private userService: UserService, private router: Router, private keycloakService: KeycloakService) { }
 
   ngOnInit() {
-    this.getUserTransactions(this.keycloakService.getUsername());
+    this.getAllUserTransactions(this.keycloakService.getUsername());
   }
 
-  async getUserTransactions(payerId: string) {
-    await this.userService.getUserTransactions(payerId).subscribe(async (response: any) => {
-      this.transactions = response
+  async getAllUserTransactions(payerId: string) {
+    await this.userService.getAllUserTransactions(payerId).subscribe(async (response: any) => {
+      this.allTransactions = response
     })
   }
 
@@ -69,21 +78,57 @@ export class TransactionRecordsComponent implements OnInit {
   }
 
   downloadLast10Transactions() {
-    this.userService.getLast10Transactions().subscribe(res => {
-      this.downloadFile(res);
-    })
+    this.downloadFile(this.last10Transactions);
   }
 
   downloadCurrentMonthTransactions() {
-    this.userService.getCurrentMonthTransactions().subscribe(res => {
-      this.downloadFile(res);
-    })
+    this.downloadFile(this.currentMonthTransactions);
   }
 
   downloadLast3MonthsTransactions() {
-    this.userService.getLast3MonthsTransactions().subscribe(res => {
-      this.downloadFile(res);
+    this.downloadFile(this.last3MonthsTransactions);
+  }
+
+  downloadAllTransactions() {
+    this.downloadFile(this.allTransactions);
+  }
+
+  showLast10Transactions() {
+    this.showLast10TransactionsFlag = true;
+    this.showCurrentMonthTransactionsFlag = false;
+    this.showLast3MonthsTransactionsFlag = false;
+    this.showAllTransactionsFlag = false;
+    this.userService.getLast10Transactions(this.keycloakService.getUsername()).subscribe(res => {
+      this.last10Transactions = res;
     })
   }
+
+  showCurrentMonthTransactions() {
+    this.showLast10TransactionsFlag = false;
+    this.showCurrentMonthTransactionsFlag = true;
+    this.showLast3MonthsTransactionsFlag = false;
+    this.showAllTransactionsFlag = false;
+    this.userService.getCurrentMonthTransactions(this.keycloakService.getUsername()).subscribe(res => {
+      this.currentMonthTransactions = res;
+    })
+  }
+
+  showLast3MonthsTransactions() {
+    this.showLast10TransactionsFlag = false;
+    this.showCurrentMonthTransactionsFlag = false;
+    this.showLast3MonthsTransactionsFlag = true;
+    this.showAllTransactionsFlag = false;
+    this.userService.getLast3MonthsTransactions(this.keycloakService.getUsername()).subscribe(res => {
+      this.last3MonthsTransactions = res;
+    })
+  }
+
+  showAllTransactions() {
+    this.showLast10TransactionsFlag = false;
+    this.showCurrentMonthTransactionsFlag = false;
+    this.showLast3MonthsTransactionsFlag = false;
+    this.showAllTransactionsFlag = true;
+  }
+
 }
 

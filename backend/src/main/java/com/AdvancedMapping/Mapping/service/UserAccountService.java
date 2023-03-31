@@ -106,15 +106,18 @@ public class UserAccountService {
 	}
 
 
-	public List<Transaction> getLast10Transactions() {
-		return transactionRepo.findLast10Transactions();
+	public List<Transaction> getLast10Transactions(String payerId) {
+		List<Transaction> transactions = transactionRepo.findLast10Transactions();
+		return transactions.stream().filter(f -> f.getPayerId().equals(payerId)).collect(Collectors.toList());
 	}
 
-	public List<Transaction> getCurrentMonthTransactions() {
-		return transactionRepo.findCurrentMonthTransactions();
+	public List<Transaction> getCurrentMonthTransactions(String payerId) {
+		List<Transaction> transactions = transactionRepo.findCurrentMonthTransactions();
+		return transactions.stream().filter(f -> f.getPayerId().equals(payerId)).collect(Collectors.toList());
 	}
 
-	public List<Transaction> getLast3MonthTransactions() {
-		return transactionRepo.findLast3MonthTransactions();
+	public List<Transaction> getLast3MonthTransactions(String payerId) {
+		List<Transaction> transactions = transactionRepo.findLast3MonthTransactions();
+		return transactions.stream().filter(f -> f.getPayerId().equals(payerId)).collect(Collectors.toList());
 	}
 }
